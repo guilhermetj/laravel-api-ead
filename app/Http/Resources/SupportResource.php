@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LessonResource extends JsonResource
+class SupportResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +16,11 @@ class LessonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => ucwords(strtolower($this->name)), //conversãop do primeiro caractere das paralavras para maiusculo
-            'description' =>$this->description ,
-            'video' => $this->video,
+            'status' =>$this->status ,
+            'status_label' =>$this->statusOptions[$this->status],
+            'description' =>$this->description,
+            'user' => new UserResource($this->user),
+            'lesson' => new LessonResource($this->lesson),
         ];
     }
 }

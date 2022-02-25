@@ -4,9 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LessonResource extends JsonResource
+class UserResource extends JsonResource
 {
-    /**
+  /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -15,10 +15,8 @@ class LessonResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => ucwords(strtolower($this->name)), //conversãop do primeiro caractere das paralavras para maiusculo
-            'description' =>$this->description ,
-            'video' => $this->video,
+            'name' =>$this->name ,
+            'email' =>$this->email ,
         ];
     }
 }

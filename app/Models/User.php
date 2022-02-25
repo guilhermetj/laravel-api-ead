@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\UuidTrait;
+use App\Models\Support;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,5 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function supports()
+    {
+        return $this->hasMany(Support::class);
+    }
 
 }
