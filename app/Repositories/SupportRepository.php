@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Support;
+use Illuminate\Support\Arr;
 
 class SupportRepository
 {
@@ -31,10 +32,38 @@ class SupportRepository
                             $filter = $filters['filter'];
                             $query->where('description', 'LIKE', "%{$filter}%");
                         }
-                    })          
+                    })
+                    ->orderBy('updated_at')          
                     ->get();
     }
 
+    public function createNewSupport(array $data): Support
+    {
+        $support = $this->getUserAuth()->supports()->create([
+            'lesson_id' => $data['lesson'],
+            'description' => $data['description'],
+            'status' => $data['status'],
+        ]);
+
+        return $support;
+    }
+    public function createReplyTosupportId(string $supportId, array $data)
+    {
+        $user = $this->getUserAuth();
+        $support = $this->getSupport($supportId)
+                        ->replies()
+                        ->create([
+                        'description' => $data['description'],
+                        'user_id' => $user->id,
+                        ]);
+
+        return $support;
+    }
+    private function getSupport(string $id)
+    {
+        // return auth()->user();
+        return $this->entity->findOrFail($id);
+    }
 
     private function getUserAuth(): User
     {
