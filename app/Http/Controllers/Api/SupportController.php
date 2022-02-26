@@ -24,6 +24,12 @@ class SupportController extends Controller
        $supports = $this->repository->getSupports($request->all());
        return SupportResource::collection($supports);
     }
+    public function mySupports(Request $request)
+    {
+       $supports = $this->repository->getMySupports($request->all());
+       
+       return SupportResource::collection($supports);
+    }
 
     public function store(StoreSupport $request)
     {
@@ -31,10 +37,4 @@ class SupportController extends Controller
        return new SupportResource($support);
     }
 
-    public function createReply(StoreReplySupport $request, $supportID)
-    {
-       $reply = $this->repository->createReplyTosupportId($supportID, $request->validated());
-
-       return new ReplySupportResource($reply);
-    }
 }
