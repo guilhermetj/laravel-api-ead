@@ -24,8 +24,6 @@ class AuthController extends Controller
 
         // if($request->has('logout_others_device')) {$user->tokens()->delete();} deletar tokens do usuario
 
-        
-
         $token = $user->createToken($request->device_name)->plainTextToken;
         return response()->json([
             'token' => $token
