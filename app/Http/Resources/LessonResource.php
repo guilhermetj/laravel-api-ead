@@ -16,6 +16,7 @@ class LessonResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'module_id' => $this->id,
             'name' => ucwords(strtolower($this->name)), //conversãop do primeiro caractere das palavras para maiusculo
             'description' =>$this->description ,
             'video' => $this->video,

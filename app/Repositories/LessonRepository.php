@@ -23,6 +23,11 @@ class LessonRepository
         return $this->entity->where('module_id', $moduleId)->get();
     }
 
+    public function getLesson(string $identify)
+    {
+        return $this->entity->findOrFail($identify);
+    }
+
     public function markLessonViewed(string $lessonId)
     {
         $user = $this->getUserAuth();

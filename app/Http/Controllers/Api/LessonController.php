@@ -24,16 +24,16 @@ class LessonController extends Controller
        return LessonResource::collection($lessons);
     }
 
-    public function show($moduleId)
+    public function show($id)
     {
-       $lessons = $this->repository->getLessonsByModuleId($moduleId);
-
+       $lessons = $this->repository->getLesson($id);
        return new LessonResource($lessons);
     }
     
     public function viewed(StoreView $request)
     {
         $this->repository->markLessonViewed($request->lesson);
+
         return response()->json(['success' => true]);
     }
 }

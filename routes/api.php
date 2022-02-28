@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/courses/{id}/modules', [ModuleController::class, 'index'] );
 
     Route::get('/modules/{id}/lessons', [LessonController::class, 'index'] );
-    Route::get('/lessons/{id}', [LessonController::class, 'index'] );
+    Route::get('/lessons/{id}', [LessonController::class, 'show'] );
 
     Route::post('/lessons/viewed', [LessonController::class, 'viewed'] );
 
